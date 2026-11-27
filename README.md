@@ -30,3 +30,5 @@ La página principal muestra `VERCEL_ENV`, la rama de git y el **hostname** de l
 ## Scripts
 
 `npm run dev`, `build` (migra y compila), `lint`, `typecheck`, `test`.
+
+<!-- PR de prueba para la línea base del sandbox (27-nov). -->
