@@ -1,0 +1,24 @@
+# Borra la rama de Neon de un preview cuando se cierra su PR (fusionado o no).
+# La rama `preview/<rama-de-git>` la crea la integracion Neon-Vercel al activar
+# "Create database branch for deployment" en Preview; aqui solo se limpia.
+# Requiere la variable NEON_PROJECT_ID y el secreto NEON_API_KEY del repo.
+name: Limpieza de ramas de preview en Neon
+on:
+  pull_request:
+    types: [closed]
+
+permissions: {}
+
+jobs:
+  borrar-rama:
+    # Los PR de forks no reciben secretos; no hay nada que borrar con ellos.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # v3.2.1, fijado por commit.
+      - uses: neondatabase/delete-branch-action@4468d825d5a88ef4012f1705a82f02ec3072f776
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: preview/${{ github.head_ref }}
+          api_key: ${{ secrets.NEON_API_KEY }}
