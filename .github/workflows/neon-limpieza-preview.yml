@@ -1,0 +1,14 @@
+name: Limpieza de ramas de preview en Neon
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  borrar-rama:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: preview/${{ github.head_ref }}
+          api_key: ${{ secrets.NEON_API_KEY }}
