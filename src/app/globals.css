@@ -1,0 +1,4 @@
+body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+.box { border: 1px solid #ccc; border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+form { display: flex; flex-direction: column; gap: .5rem; margin: .5rem 0; }
+.error { color: #b00020; }
